@@ -1,6 +1,5 @@
 package licenta.socializerapp;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
@@ -71,8 +70,6 @@ public class PostActivity extends AppCompatActivity {
 
         updatePostButtonState();
         updateCharacterCountTextViewText();
-        getActionBar().show();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void post () {
@@ -119,16 +116,5 @@ public class PostActivity extends AppCompatActivity {
     private void updateCharacterCountTextViewText () {
         String characterCountString = String.format("%d/%d", postEditText.length(), maxCharacterCount);
         characterCountTextView.setText(characterCountString);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return false;
-        }
     }
 }

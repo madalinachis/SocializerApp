@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -19,7 +20,7 @@ import com.parse.SignUpCallback;
 /**
  * Activity which displays a login screen to the user.
  */
-public class SignUpActivity extends Activity {
+public class SignUpActivity extends AppCompatActivity {
     // UI references.
     private EditText usernameEditText;
     private EditText passwordEditText;

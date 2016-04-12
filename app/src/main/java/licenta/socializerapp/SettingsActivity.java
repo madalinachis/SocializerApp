@@ -3,6 +3,7 @@ package licenta.socializerapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Activity that displays the settings screen.
  */
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends AppCompatActivity {
 
     private List<Float> availableOptions = Application.getConfigHelper().getSearchDistanceAvailableOptions();
 
