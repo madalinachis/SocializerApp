@@ -5,8 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,7 +24,7 @@ import com.parse.SaveCallback;
 /**
  * Activity which displays a login screen to the user, offering registration as well.
  */
-public class PostActivity extends Activity {
+public class PostActivity extends AppCompatActivity {
     // UI references.
     private EditText postEditText;
     private TextView characterCountTextView;
@@ -69,6 +71,8 @@ public class PostActivity extends Activity {
 
         updatePostButtonState();
         updateCharacterCountTextViewText();
+        getActionBar().show();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void post () {
@@ -115,5 +119,16 @@ public class PostActivity extends Activity {
     private void updateCharacterCountTextViewText () {
         String characterCountString = String.format("%d/%d", postEditText.length(), maxCharacterCount);
         characterCountTextView.setText(characterCountString);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return false;
+        }
     }
 }
