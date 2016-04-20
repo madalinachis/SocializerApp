@@ -10,12 +10,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/post_button"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/post"
-        android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/chat_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/chat"
+            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+
+        <Button
+            android:id="@+id/post_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/post"
+            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+
+        <Button
+            android:id="@+id/transfer_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/transfer"
+            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+
+    </LinearLayout>
 
     <fragment
         android:id="@+id/map_fragment"

@@ -16,7 +16,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -55,6 +54,9 @@ import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+
+import licenta.socializerapp.chat.WiFiServiceDiscoveryActivity;
+import licenta.socializerapp.transferfile.WiFiDirectActivity;
 
 public class MainActivity extends AppCompatActivity implements LocationListener,
         GoogleApiClient.ConnectionCallbacks,
@@ -262,6 +264,22 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
                 Intent intent = new Intent(MainActivity.this, PostActivity.class);
                 intent.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
+                startActivity(intent);
+            }
+        });
+
+        Button chatButton = (Button) findViewById(R.id.chat_button);
+        chatButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WiFiServiceDiscoveryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button transferFileButton = (Button) findViewById(R.id.transfer_button);
+        transferFileButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WiFiDirectActivity.class);
                 startActivity(intent);
             }
         });
@@ -603,8 +621,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                             }
                         }
                         // Display a green marker with the post information
-                        markerOpts =
-                                markerOpts.title(post.getText()).snippet(post.getUser().getUsername())
+                        markerOpts = markerOpts.title(post.getText()).snippet(post.getUser().getUsername())
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                     }
                     // Add a new marker
