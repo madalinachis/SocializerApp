@@ -15,9 +15,7 @@ public class ConfigHelper {
     public void fetchConfigIfNeeded() {
         final long configRefreshInterval = 60 * 60; // 1 hour
 
-        if (config == null ||
-                System.currentTimeMillis() - configLastFetchedTime > configRefreshInterval) {
-            // Set the config to current, just to load the cache
+        if (config == null || System.currentTimeMillis() - configLastFetchedTime > configRefreshInterval) {
             config = ParseConfig.getCurrentConfig();
 
             // Set the current time, to flag that the operation started and prevent double fetch
@@ -25,11 +23,9 @@ public class ConfigHelper {
                 @Override
                 public void done(ParseConfig parseConfig, ParseException e) {
                     if (e == null) {
-                        // Yay, retrieved successfully
                         config = parseConfig;
                         configLastFetchedTime = System.currentTimeMillis();
                     } else {
-                        // Fetch failed, reset the time
                         configLastFetchedTime = 0;
                     }
                 }
@@ -38,7 +34,7 @@ public class ConfigHelper {
     }
 
     public List<Float> getSearchDistanceAvailableOptions() {
-        final List<Float> defaultOptions = Arrays.asList(250.0f, 1000.0f, 2000.0f, 5000.0f);
+        final List<Float> defaultOptions = Arrays.asList(250.0f, 1000.0f, 2000.0f, 5000.0f, 7000.0f);
 
         List<Number> options = config.getList("availableFilterDistances");
         if (options == null) {
@@ -53,8 +49,7 @@ public class ConfigHelper {
         return typedOptions;
     }
 
-    public int getPostMaxCharacterCount () {
-        int value = config.getInt("postMaxCharacterCount", 140);
-        return value;
+    public int getPostMaxCharacterCount() {
+        return config.getInt("postMaxCharacterCount", 140);
     }
 }

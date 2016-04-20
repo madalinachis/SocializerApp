@@ -395,7 +395,7 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
                 serverSocket.close();
 
 				/*
-				 * Set file related data and decrypt file in postExecute.
+                 * Set file related data and decrypt file in postExecute.
 				 */
                 this.Extension = obj.getFileName();
                 this.EncryptedFile = f;

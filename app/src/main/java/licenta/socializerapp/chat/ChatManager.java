@@ -12,7 +12,7 @@ import java.util.Arrays;
 /**
  * Handles reading and writing of messages with socket buffers. Uses a Handler
  * to post messages to UI thread for UI updates.
- * <p/>
+ * <p>
  * Created by Madalina.Chis on 2/15/2016.
  */
 public class ChatManager implements Runnable {

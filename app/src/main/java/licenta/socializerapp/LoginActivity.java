@@ -1,6 +1,5 @@
 package licenta.socializerapp;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,14 +20,12 @@ import com.parse.ParseUser;
  * Activity which displays a login screen to the user, offering registration as well.
  */
 public class LoginActivity extends AppCompatActivity {
-    // UI references.
     private EditText usernameEditText;
     private EditText passwordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
 
         // Set up the login form.
@@ -46,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Set up the submit button click handler
         Button actionButton = (Button) findViewById(R.id.action_button);
         actionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -86,16 +82,13 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
         dialog.setMessage(getString(R.string.progress_login));
         dialog.show();
-        // Call the Parse login method
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
                 dialog.dismiss();
                 if (e != null) {
-                    // Show the error message
                     Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 } else {
-                    // Start an intent for the dispatch activity
                     Intent intent = new Intent(LoginActivity.this, DispatchActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);

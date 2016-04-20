@@ -31,11 +31,12 @@ public class FileTransferService extends IntentService {
     public static final String EXTRAS_GROUP_OWNER_ADDRESS = "go_host";
     public static final String EXTRAS_GROUP_OWNER_PORT = "go_port";
 
-    public static  int PORT = 8888;
+    public static int PORT = 8888;
     public static final String inetaddress = "inetaddress";
     public static final int ByteSize = 512;
     public static final String Extension = "extension";
     public static final String Filelength = "filelength";
+
     public FileTransferService(String name) {
         super(name);
     }
@@ -50,6 +51,7 @@ public class FileTransferService extends IntentService {
         super.onCreate();
         mHandler = new Handler();
     }
+
     /*
      * (non-Javadoc)
      * @see android.app.IntentService#onHandleIntent(android.content.Intent)
@@ -82,10 +84,10 @@ public class FileTransferService extends IntentService {
                 Long FileLength = Long.parseLong(filelength);
                 WiFiTransferModal transObj = null;
                 ObjectOutputStream oos = new ObjectOutputStream(stream);
-                if(transObj == null) transObj = new WiFiTransferModal();
+                if (transObj == null) transObj = new WiFiTransferModal();
 
 
-                transObj = new WiFiTransferModal(extension,FileLength);
+                transObj = new WiFiTransferModal(extension, FileLength);
                 oos.writeObject(transObj);
 
                 try {
@@ -95,7 +97,7 @@ public class FileTransferService extends IntentService {
                 }
                 DeviceDetailFragment.copyFile(is, stream);
                 Log.d(WiFiDirectActivity.TAG, "Client: Data written");
-                oos.close();	//close the ObjectOutputStream after sending data.
+                oos.close();    //close the ObjectOutputStream after sending data.
             } catch (IOException e) {
                 Log.e(WiFiDirectActivity.TAG, e.getMessage());
                 e.printStackTrace();

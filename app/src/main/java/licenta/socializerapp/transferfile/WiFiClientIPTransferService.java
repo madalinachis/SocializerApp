@@ -17,12 +17,13 @@ import android.util.Log;
 /**
  * Created by Madalina.Chis on 4/11/2016.
  */
-public class WiFiClientIPTransferService extends IntentService{
+public class WiFiClientIPTransferService extends IntentService {
 
     public WiFiClientIPTransferService(String name) {
         super(name);
         // TODO Auto-generated constructor stub
     }
+
     public WiFiClientIPTransferService() {
         super("WiFiClientIPTransferService");
     }
@@ -40,7 +41,7 @@ public class WiFiClientIPTransferService extends IntentService{
         Context context = GlobalApplication.getGlobalAppContext();
         if (intent.getAction().equals(FileTransferService.ACTION_SEND_FILE)) {
             String host = intent.getExtras().getString(FileTransferService.EXTRAS_GROUP_OWNER_ADDRESS);
-            String InetAddress =  intent.getExtras().getString(FileTransferService.inetaddress);
+            String InetAddress = intent.getExtras().getString(FileTransferService.inetaddress);
 
             Socket socket = new Socket();
             int port = intent.getExtras().getInt(FileTransferService.EXTRAS_GROUP_OWNER_PORT);
@@ -52,7 +53,7 @@ public class WiFiClientIPTransferService extends IntentService{
                 socket.connect((new InetSocketAddress(host, port)), FileTransferService.SOCKET_TIMEOUT);
                 Log.d(WiFiDirectActivity.TAG, "Client socket - " + socket.isConnected());
                 OutputStream stream = socket.getOutputStream();
-              //  ContentResolver cr = context.getContentResolver();
+                //  ContentResolver cr = context.getContentResolver();
                 InputStream is = null;
 
                /*
@@ -64,7 +65,7 @@ public class WiFiClientIPTransferService extends IntentService{
                 oos.writeObject(transObj);
                 System.out.println("Sending request to Socket Server");
 
-                oos.close();	//close the ObjectOutputStream after sending data.
+                oos.close();    //close the ObjectOutputStream after sending data.
             } catch (IOException e) {
                 Log.e(WiFiDirectActivity.TAG, e.getMessage());
                 e.printStackTrace();

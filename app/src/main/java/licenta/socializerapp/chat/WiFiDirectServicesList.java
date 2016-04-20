@@ -19,7 +19,7 @@ import licenta.socializerapp.R;
 /**
  * A simple ListFragment that shows the available services as published by the
  * peers
- * <p/>
+ * <p>
  * Created by Madalina.Chis on 2/15/2016.
  */
 public class WiFiDirectServicesList extends ListFragment {

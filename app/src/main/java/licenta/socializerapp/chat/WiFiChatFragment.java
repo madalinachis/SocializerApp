@@ -19,7 +19,7 @@ import licenta.socializerapp.R;
 /**
  * This fragment handles chat related UI which includes a list view for messages
  * and a message entry field with send button.
- * <p/>
+ * <p>
  * Created by Madalina.Chis on 2/15/2016.
  */
 public class WiFiChatFragment extends Fragment {

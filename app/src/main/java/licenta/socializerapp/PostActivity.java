@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -35,7 +34,6 @@ public class PostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_post);
 
         Intent intent = getIntent();
@@ -72,28 +70,22 @@ public class PostActivity extends AppCompatActivity {
         updateCharacterCountTextViewText();
     }
 
-    private void post () {
+    private void post() {
         String text = postEditText.getText().toString().trim();
 
-        // Set up a progress dialog
         final ProgressDialog dialog = new ProgressDialog(PostActivity.this);
         dialog.setMessage(getString(R.string.progress_post));
         dialog.show();
 
-        // Create a post.
         AnywallPost post = new AnywallPost();
-
-        // Set the location to the current user's location
         post.setLocation(geoPoint);
         post.setText(text);
         post.setUser(ParseUser.getCurrentUser());
-        ParseACL acl = new ParseACL();
 
-        // Give public read access
+        ParseACL acl = new ParseACL();
         acl.setPublicReadAccess(true);
         post.setACL(acl);
 
-        // Save the post
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -103,17 +95,17 @@ public class PostActivity extends AppCompatActivity {
         });
     }
 
-    private String getPostEditTextText () {
+    private String getPostEditTextText() {
         return postEditText.getText().toString().trim();
     }
 
-    private void updatePostButtonState () {
+    private void updatePostButtonState() {
         int length = getPostEditTextText().length();
         boolean enabled = length > 0 && length < maxCharacterCount;
         postButton.setEnabled(enabled);
     }
 
-    private void updateCharacterCountTextViewText () {
+    private void updateCharacterCountTextViewText() {
         String characterCountString = String.format("%d/%d", postEditText.length(), maxCharacterCount);
         characterCountTextView.setText(characterCountString);
     }

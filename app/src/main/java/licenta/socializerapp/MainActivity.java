@@ -622,7 +622,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                         }
                         // Display a green marker with the post information
                         markerOpts = markerOpts.title(post.getText()).snippet(post.getUser().getUsername())
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                     }
                     // Add a new marker
                     Marker marker = mapFragment.getMap().addMarker(markerOpts);

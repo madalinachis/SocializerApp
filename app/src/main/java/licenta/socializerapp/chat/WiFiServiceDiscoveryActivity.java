@@ -1,7 +1,6 @@
 package licenta.socializerapp.chat;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -45,10 +45,10 @@ import java.util.Map;
  * the same service, the app opens up sockets to initiate a chat.
  * {@code WiFiChatFragment} is then added to the the main activity which manages
  * the interface and messaging needs for a chat session.
- * <p/>
+ * <p>
  * Created by Madalina.Chis on 2/15/2016.
  */
-public class WiFiServiceDiscoveryActivity extends Activity implements
+public class WiFiServiceDiscoveryActivity extends AppCompatActivity implements
         DeviceClickListener, Handler.Callback, MessageTarget,
         ConnectionInfoListener {
     public static final String TAG = "wifidirectdemo";
