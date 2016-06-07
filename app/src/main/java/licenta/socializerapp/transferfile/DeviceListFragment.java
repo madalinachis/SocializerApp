@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import licenta.socializerapp.R;
+import licenta.socializerapp.activities.MainActivity;
 
 /**
  * A ListFragment that displays available peers on discovery and requests the
@@ -37,7 +38,6 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.setListAdapter(new WiFiPeerListAdapter(getActivity(), R.layout.row_devices, peers));
-
     }
 
     @Override
@@ -54,7 +54,7 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
     }
 
     private static String getDeviceStatus(int deviceStatus) {
-        Log.d(WiFiDirectActivity.TAG, "Peer status :" + deviceStatus);
+        Log.d(MainActivity.TAG, "Peer status :" + deviceStatus);
         switch (deviceStatus) {
             case WifiP2pDevice.AVAILABLE:
                 return "Available";
@@ -78,6 +78,7 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
     public void onListItemClick(ListView l, View v, int position, long id) {
         WifiP2pDevice device = (WifiP2pDevice) getListAdapter().getItem(position);
         ((DeviceActionListener) getActivity()).showDetails(device);
+
     }
 
     /**
@@ -125,7 +126,7 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
         view.setText(device.deviceName);
         view = (TextView) mContentView.findViewById(R.id.my_status);
         view.setText(getDeviceStatus(device.status));
-    }
+   }
 
     @Override
     public void onPeersAvailable(WifiP2pDeviceList peerList) {
@@ -136,8 +137,10 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
         peers.addAll(peerList.getDeviceList());
         ((WiFiPeerListAdapter) getListAdapter()).notifyDataSetChanged();
         if (peers.size() == 0) {
-            Log.d(WiFiDirectActivity.TAG, "No devices found");
+            Log.d(MainActivity.TAG, "No devices found");
         }
+        ((DeviceActionListener) getActivity()).getPeersList(peerList);;
+
     }
 
     public void clearPeers() {
@@ -175,6 +178,7 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
         void connect(WifiP2pConfig config);
 
         void disconnect();
-    }
 
+        void getPeersList(WifiP2pDeviceList peerList);
+    }
 }

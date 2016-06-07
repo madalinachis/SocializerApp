@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="3dp">
+    android:paddingTop="3dp"
+    android:visibility="gone">
 
     <TextView
         android:layout_width="fill_parent"

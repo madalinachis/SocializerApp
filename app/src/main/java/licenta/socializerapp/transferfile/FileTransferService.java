@@ -17,6 +17,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
+import licenta.socializerapp.activities.MainActivity;
+
 /**
  * A service that process each file transfer request i.e Intent by opening a
  * socket connection with the WiFi Direct Group Owner and writing the file
@@ -69,11 +71,11 @@ public class FileTransferService extends IntentService {
             String filelength = intent.getExtras().getString(Filelength);
 
             try {
-                Log.d(WiFiDirectActivity.TAG, "Opening client socket - ");
+                Log.d(MainActivity.TAG, "Opening client socket - ");
                 socket.bind(null);
                 socket.connect((new InetSocketAddress(host, port)), SOCKET_TIMEOUT);
 
-                Log.d(WiFiDirectActivity.TAG, "Client socket - " + socket.isConnected());
+                Log.d(MainActivity.TAG, "Client socket - " + socket.isConnected());
                 OutputStream stream = socket.getOutputStream();
                 ContentResolver cr = context.getContentResolver();
                 InputStream is = null;
@@ -84,8 +86,7 @@ public class FileTransferService extends IntentService {
                 Long FileLength = Long.parseLong(filelength);
                 WiFiTransferModal transObj = null;
                 ObjectOutputStream oos = new ObjectOutputStream(stream);
-                if (transObj == null) transObj = new WiFiTransferModal();
-
+                transObj = new WiFiTransferModal();
 
                 transObj = new WiFiTransferModal(extension, FileLength);
                 oos.writeObject(transObj);
@@ -93,13 +94,13 @@ public class FileTransferService extends IntentService {
                 try {
                     is = cr.openInputStream(Uri.parse(fileUri));
                 } catch (FileNotFoundException e) {
-                    Log.d(WiFiDirectActivity.TAG, e.toString());
+                    Log.d(MainActivity.TAG, e.toString());
                 }
                 DeviceDetailFragment.copyFile(is, stream);
-                Log.d(WiFiDirectActivity.TAG, "Client: Data written");
+                Log.d(MainActivity.TAG, "Client: Data written");
                 oos.close();    //close the ObjectOutputStream after sending data.
             } catch (IOException e) {
-                Log.e(WiFiDirectActivity.TAG, e.getMessage());
+                Log.e(MainActivity.TAG, e.getMessage());
                 e.printStackTrace();
                 mHandler.post(new Runnable() {
 

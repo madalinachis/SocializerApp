@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
+import licenta.socializerapp.activities.MainActivity;
+
 /**
  * Created by Madalina.Chis on 4/11/2016.
  */
@@ -48,10 +50,10 @@ public class WiFiClientIPTransferService extends IntentService {
 
             try {
 
-                Log.d(WiFiDirectActivity.TAG, "Opening client socket for First tiime- ");
+                Log.d(MainActivity.TAG, "Opening client socket for First tiime- ");
                 socket.bind(null);
                 socket.connect((new InetSocketAddress(host, port)), FileTransferService.SOCKET_TIMEOUT);
-                Log.d(WiFiDirectActivity.TAG, "Client socket - " + socket.isConnected());
+                Log.d(MainActivity.TAG, "Client socket - " + socket.isConnected());
                 OutputStream stream = socket.getOutputStream();
                 //  ContentResolver cr = context.getContentResolver();
                 InputStream is = null;
@@ -67,7 +69,7 @@ public class WiFiClientIPTransferService extends IntentService {
 
                 oos.close();    //close the ObjectOutputStream after sending data.
             } catch (IOException e) {
-                Log.e(WiFiDirectActivity.TAG, e.getMessage());
+                Log.e(MainActivity.TAG, e.getMessage());
                 e.printStackTrace();
             } finally {
                 if (socket != null) {

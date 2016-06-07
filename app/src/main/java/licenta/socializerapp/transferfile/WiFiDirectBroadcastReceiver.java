@@ -11,6 +11,7 @@ import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
 import android.util.Log;
 
 import licenta.socializerapp.R;
+import licenta.socializerapp.activities.MainActivity;
 
 /**
  * A BroadcastReceiver that notifies of important wifi p2p events.
@@ -19,7 +20,7 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
 
     private WifiP2pManager manager;
     private Channel channel;
-    private WiFiDirectActivity activity;
+    private MainActivity activity;
 
     /**
      * @param manager  WifiP2pManager system service
@@ -27,7 +28,7 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
      * @param activity activity associated with the receiver
      */
     public WiFiDirectBroadcastReceiver(WifiP2pManager manager, Channel channel,
-                                       WiFiDirectActivity activity) {
+                                       MainActivity activity) {
         super();
         this.manager = manager;
         this.channel = channel;
@@ -49,7 +50,7 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
                 activity.resetData();
 
             }
-            Log.d(WiFiDirectActivity.TAG, "P2P state changed - " + state);
+            Log.d(MainActivity.TAG, "P2P state changed - " + state);
         } else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
 
             // request available peers from the wifi p2p manager. This is an
@@ -59,7 +60,7 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
                 manager.requestPeers(channel, (PeerListListener) activity.getFragmentManager()
                         .findFragmentById(R.id.frag_list));
             }
-            Log.d(WiFiDirectActivity.TAG, "P2P peers changed");
+            Log.d(MainActivity.TAG, "P2P peers changed");
         } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
 
             if (manager == null) {
@@ -67,7 +68,6 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
             }
 
             NetworkInfo networkInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
-
             if (networkInfo.isConnected()) {
 
                 // we are connected with the other device, request connection
